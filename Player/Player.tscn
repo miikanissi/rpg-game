@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=35 format=2]
 
-[ext_resource path="res://Player/Player Base v2.png" type="Texture" id=1]
+[ext_resource path="res://Player/All characters.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -9,13 +9,29 @@ const FRICTION = 8
 const ACCELERATION = 8
 const MAX_SPEED = 80
 
+enum {
+	MOVE,
+	FISH,
+}
+var state = MOVE
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
 
+onready var raycast = $RayCast2D
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get(\"parameters/playback\")
 
-func _physics_process(_delta):
+func _ready():
+	animationTree.active = true
+
+func _physics_process(delta):
+	match state:
+		MOVE:
+			move_state(delta)
+		FISH:
+			fish_state()
+
+func move_state(delta):
 	input_vector.x = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
 	input_vector.y = Input.get_action_strength(\"ui_down\") - Input.get_action_strength(\"ui_up\")
 	input_vector = input_vector.normalized()
@@ -23,6 +39,7 @@ func _physics_process(_delta):
 	if input_vector != Vector2.ZERO:
 		animationTree.set(\"parameters/Idle/blend_position\", input_vector)
 		animationTree.set(\"parameters/Walk/blend_position\", input_vector)
+		animationTree.set(\"parameters/Fishing/blend_position\", input_vector)
 		animationState.travel(\"Walk\")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION)
 	else:
@@ -30,6 +47,22 @@ func _physics_process(_delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
 	
 	velocity = move_and_slide(velocity)
+	if Input.is_action_just_pressed(\"Interact\"):
+		state = FISH
+		near_fishspot()
+
+func fish_state():
+	velocity = Vector2.ZERO
+	animationState.travel(\"Fishing\")
+	if Input.is_action_just_pressed(\"ui_up\") or Input.is_action_just_pressed(\"ui_down\") or Input.is_action_just_pressed(\"ui_right\") or Input.is_action_just_pressed(\"ui_left\"):
+		state = MOVE
+
+func near_fishspot():
+	var space_state = get_world_2d().direct_space_state
+	var player_direction = input_vector
+	var range_of_interaction = 2000;
+	var result = space_state.intersect_ray(get_global_transform().origin, get_global_transform().origin + input_vector * range_of_interaction, [self])
+	print (result)
 "
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -37,11 +70,45 @@ radius = 6.814
 height = 8.71341
 
 [sub_resource type="Animation" id=25]
+resource_name = "FishingLeft"
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("MovingSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 32, 33 ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "FishingRight"
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("MovingSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 34, 35 ]
+}
+
+[sub_resource type="Animation" id=3]
 resource_name = "IdleDown"
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("MovingSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -53,12 +120,12 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=4]
 resource_name = "IdleLeft"
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("MovingSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -70,12 +137,12 @@ tracks/0/keys = {
 "values": [ 16 ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=5]
 resource_name = "IdleRight"
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("MovingSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -92,7 +159,7 @@ resource_name = "IdleUp"
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("MovingSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -108,7 +175,7 @@ tracks/0/keys = {
 length = 0.8
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("MovingSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -124,7 +191,7 @@ tracks/0/keys = {
 length = 0.8
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("MovingSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -141,7 +208,7 @@ resource_name = "WalkRight"
 length = 0.8
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("MovingSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -157,7 +224,7 @@ tracks/0/keys = {
 length = 0.8
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("MovingSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -168,6 +235,31 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 9, 10, 11, 12, 13, 14, 15, 8 ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "FishingLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "FishingRight"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "FishingRight"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "FishingRight"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=31]
+blend_point_0/node = SubResource( 27 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 28 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 29 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 30 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=11]
 animation = "IdleDown"
@@ -223,12 +315,18 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
 [sub_resource type="AnimationNodeStateMachine" id=23]
+states/Fishing/node = SubResource( 31 )
+states/Fishing/position = Vector2( 580, 69 )
 states/Idle/node = SubResource( 15 )
 states/Idle/position = Vector2( 407, 69 )
 states/Walk/node = SubResource( 20 )
 states/Walk/position = Vector2( 407, 159 )
-transitions = [ "Idle", "Walk", SubResource( 21 ), "Walk", "Idle", SubResource( 22 ) ]
+transitions = [ "Idle", "Walk", SubResource( 21 ), "Walk", "Idle", SubResource( 22 ), "Idle", "Fishing", SubResource( 32 ), "Fishing", "Idle", SubResource( 33 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=24]
@@ -236,12 +334,12 @@ start_node = "Idle"
 [node name="Player" type="KinematicBody2D"]
 script = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="MovingSprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
-vframes = 4
-hframes = 8
-frame = 16
+vframes = 10
+hframes = 10
+frame = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -6.99382e-07, 4.76837e-07 )
@@ -250,9 +348,11 @@ scale = Vector2( -1, 1 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/IdleDown = SubResource( 25 )
-anims/IdleLeft = SubResource( 26 )
-anims/IdleRight = SubResource( 27 )
+anims/FishingLeft = SubResource( 25 )
+anims/FishingRight = SubResource( 26 )
+anims/IdleDown = SubResource( 3 )
+anims/IdleLeft = SubResource( 4 )
+anims/IdleRight = SubResource( 5 )
 anims/IdleUp = SubResource( 6 )
 anims/WalkDown = SubResource( 7 )
 anims/WalkLeft = SubResource( 8 )
@@ -262,7 +362,7 @@ anims/WalkUp = SubResource( 10 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 24 )
+parameters/Fishing/blend_position = Vector2( -0.137313, 0.037931 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Walk/blend_position = Vector2( 0, 0 )
