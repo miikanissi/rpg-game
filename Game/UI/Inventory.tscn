@@ -1,109 +1,126 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/UIpack_RPG/PNG/panel_brown.png" type="Texture" id=1]
-[ext_resource path="res://Assets/UIpack_RPG/PNG/iconCross_grey.png" type="Texture" id=2]
-[ext_resource path="res://Assets/UIpack_RPG/Vector/uipack_rpg_vector.svg" type="Texture" id=3]
+[ext_resource path="res://Game/UI/ItemSlot.gd" type="Script" id=2]
+[ext_resource path="res://Game/UI/CharacterContainer.gd" type="Script" id=3]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/panelInset_beige.png" type="Texture" id=4]
-[ext_resource path="res://Assets/UIpack_RPG/PNG/buttonSquare_beige_pressed.png" type="Texture" id=5]
-[ext_resource path="res://Assets/UIpack_RPG/PNG/buttonSquare_beige.png" type="Texture" id=6]
-
+[ext_resource path="res://Game/UI/Inventory.gd" type="Script" id=8]
+[ext_resource path="res://Game/UI/ItemContainer.gd" type="Script" id=10]
 
 [node name="Inventory" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 8.0
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="NinePatchRect" parent="."]
-margin_left = 224.0
-margin_top = 48.0
-margin_right = 408.0
-margin_bottom = 301.0
+[node name="Inventory background" type="NinePatchRect" parent="."]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 256.0
 texture = ExtResource( 1 )
-patch_margin_left = 40
-patch_margin_top = 31
-patch_margin_right = 57
-patch_margin_bottom = 36
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ExitButtonContainer" type="NinePatchRect" parent="Background"]
-margin_left = 152.0
-margin_top = -8.0
-margin_right = 192.0
-margin_bottom = 36.0
-texture = ExtResource( 3 )
-region_rect = Rect2( 228, 398, 35, 38 )
-axis_stretch_horizontal = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ExitButton" type="TextureButton" parent="Background/ExitButtonContainer"]
-anchor_left = 0.325
-anchor_top = 0.273
-anchor_right = 0.325
-anchor_bottom = 0.273
-margin_left = -9.53674e-07
-margin_top = -0.0120001
-margin_right = 16.0
-margin_bottom = 14.988
-texture_normal = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ItemContainer" type="NinePatchRect" parent="Background"]
-margin_left = 16.0
-margin_top = 56.0
-margin_right = 168.0
-margin_bottom = 238.0
-texture = ExtResource( 4 )
-patch_margin_left = 63
-patch_margin_top = 36
+patch_margin_left = 68
+patch_margin_top = 26
 patch_margin_right = 23
-patch_margin_bottom = 47
+patch_margin_bottom = 36
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InventoryButton" type="TextureButton" parent="Background"]
+[node name="Item container" type="NinePatchRect" parent="Inventory background"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 48.0
-margin_bottom = 48.0
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 5 )
-expand = true
+margin_right = 176.0
+margin_bottom = 176.0
+texture = ExtResource( 4 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InventoryButton2" type="TextureButton" parent="Background"]
-margin_left = 56.0
-margin_top = 16.0
-margin_right = 88.0
-margin_bottom = 48.0
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 5 )
-expand = true
+[node name="SlotsContainer" type="ScrollContainer" parent="Inventory background/Item container"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 152.0
+margin_bottom = 152.0
+scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InventoryButton3" type="TextureButton" parent="Background"]
-margin_left = 96.0
-margin_top = 16.0
-margin_right = 128.0
-margin_bottom = 49.0
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 5 )
-expand = true
+[node name="Slots" type="GridContainer" parent="Inventory background/Item container/SlotsContainer"]
+custom_constants/vseparation = 1
+custom_constants/hseparation = 1
+
+[node name="Character background" type="NinePatchRect" parent="."]
+margin_left = 376.0
+margin_top = 64.0
+margin_right = 512.0
+margin_bottom = 256.0
+texture = ExtResource( 1 )
+patch_margin_left = 56
+patch_margin_top = 32
+patch_margin_right = 33
+patch_margin_bottom = 36
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Character container" type="NinePatchRect" parent="Character background"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 120.0
+margin_bottom = 176.0
+texture = ExtResource( 4 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SlotHead" type="Panel" parent="Character background/Character container"]
+margin_left = 40.0
+margin_top = 24.0
+margin_right = 64.0
+margin_bottom = 48.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SlotTorso" type="Panel" parent="Character background/Character container"]
+margin_left = 40.0
+margin_top = 56.0
+margin_right = 64.0
+margin_bottom = 80.0
+script = ExtResource( 2 )
+
+[node name="SlotLegs" type="Panel" parent="Character background/Character container"]
+margin_left = 40.0
+margin_top = 88.0
+margin_right = 64.0
+margin_bottom = 112.0
+script = ExtResource( 2 )
+
+[node name="SlotFeet" type="Panel" parent="Character background/Character container"]
+margin_left = 40.0
+margin_top = 120.0
+margin_right = 64.0
+margin_bottom = 144.0
+script = ExtResource( 2 )
+
+[node name="SlotRHand" type="Panel" parent="Character background/Character container"]
+margin_left = 8.0
+margin_top = 56.0
+margin_right = 32.0
+margin_bottom = 80.0
+script = ExtResource( 2 )
+
+[node name="SlotLHand" type="Panel" parent="Character background/Character container"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 96.0
+margin_bottom = 80.0
+script = ExtResource( 2 )

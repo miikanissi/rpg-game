@@ -62,6 +62,7 @@ func move_state(_delta):
 	
 	if Input.is_action_just_pressed("ui_end"):
 		Global.save_game()
+	
 # Function for Fishing once state has changed to FISH
 func fish_state():
 	velocity = Vector2.ZERO

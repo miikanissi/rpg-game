@@ -1,5 +1,13 @@
 extends Node
 
+enum SlotType {
+	SLOT_DEFAULT = 0,
+	SLOT_HEAD,
+	SLOT_TORSO,
+	SLOT_FEET,
+	SLOT_LHAND,
+	SLOT_RHAND
+}
 # assigned for areas where player is able to fish
 var can_fish = false
 
@@ -19,6 +27,7 @@ func deleted(_m_sceneParams):
 func _ready():
 	# Load game loading player in the correct scene
 	load_game()
+	
 
 func switchScene(targetScenePath, params = null):
 	# The way around this is deferring the load to a later time, when
@@ -101,7 +110,6 @@ func save_game():
 	print (save_dict) # Debugging
 	var save_file = File.new()
 	save_file.open(SAVE_PATH, File.WRITE)
-	print(save_file)
 	save_file.store_line(to_json(save_dict))
 	
 	save_file.close()
@@ -150,7 +158,6 @@ func load_game():
 			if not node:
 				ysorted.remove_child(m_player)
 				game.remove_child(stage)
-				print(node)
 			else:
 				m_currentScene = stage
 				ysorted.remove_child(m_player)

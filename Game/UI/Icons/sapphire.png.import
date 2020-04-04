@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FishingLeft.png-c51cd9e0f77d25609d8a61df52002761.stex"
+path="res://.import/sapphire.png-a2d5ba2856c89ddf4f288066a12f221a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UIpack_RPG/PNG/FishingLeft.png"
-dest_files=[ "res://.import/FishingLeft.png-c51cd9e0f77d25609d8a61df52002761.stex" ]
+source_file="res://Game/UI/Icons/sapphire.png"
+dest_files=[ "res://.import/sapphire.png-a2d5ba2856c89ddf4f288066a12f221a.stex" ]
 
 [params]
 
