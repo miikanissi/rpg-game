@@ -18,6 +18,8 @@ var m_currentScene = null setget deleted
 var m_player = null setget deleted
 var nullify = null
 
+var loadInventory = Array()
+var loadEquipment = Array()
 # save path for player data as json
 const SAVE_PATH = "user://save.json"
 
@@ -175,6 +177,14 @@ func load_game():
 		for attribute in data[node_path]:
 			if attribute == "pos":
 				node.set_position(Vector2(data[node_path]["pos"]["x"], data[node_path]["pos"]["y"]))
+			elif attribute == "inventory":
+				for attribute in data[node_path]["inventory"]:
+					for i in range(data[node_path]["inventory"][attribute]):
+						loadInventory.append(attribute.to_lower())
+			elif attribute == "equipment":
+				for attribute in data[node_path]["equipment"]:
+					loadEquipment.append(attribute.to_lower())
 			else:
 				node.set(attribute, data[node_path][attribute])
 				
+	print(loadInventory)

@@ -26,12 +26,13 @@ func _ready():
 			panelSlot.connect("mouse_exited", self, "mouse_exit_slot", [panelSlot]);
 			panelSlot.connect("gui_input", self, "slot_gui_input", [panelSlot]);
 	
-	pickup_item("axe")
-	pickup_item("pickaxe")
-	pickup_item("sapphire")
-	pickup_item("amethyst")
-	pickup_item("axe")
-	
+	for i in Global.loadInventory:
+		pickup_item(i)
+	for i in Global.loadEquipment:
+		var slot : ItemSlotClass
+		equip_item(i, slot)
+		#var axe = pickup_item(i)
+		#equip_item(i, slot : ItemSlotClass)
 func mouse_enter_slot(_slot : ItemSlotClass):
 	if _slot.item:
 		pass
@@ -67,6 +68,7 @@ func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
 					slot.putItem(holdingItem);
 					holdingItem = null;
 			elif slot.item:
+				save()
 				holdingItem = slot.item
 				itemOffset = event.global_position - holdingItem.rect_global_position;
 				slot.pickItem();
@@ -109,6 +111,16 @@ func getFreeSlot():
 		if !slot.item:
 			return slot;
 
+func checkItemExist(newItemName):
+	# Goes through all slots in inventory
+	for slot in slotList:
+		# If slot has an item checks if that item is same as new item
+		if slot.item:
+			var itemNameSlot = slot.item.itemName;
+			if itemNameSlot == newItemName:
+				slot.item.itemCount += 1
+				slot.item.updateCounter()
+				return true
 # Checks if the items slot type is the same as slots type
 func canEquip(item, slot):
 	return item.slotType == slot.slotType
@@ -117,9 +129,51 @@ func canEquip(item, slot):
 # item_id is the id in database
 func pickup_item(item_id):
 	var slot = getFreeSlot()
-	if slot:
-		var itemName = ItemDb.get_item(item_id)["itemName"]
+	var itemName = ItemDb.get_item(item_id)["itemName"]
+	var stackable = ItemDb.get_item(item_id)["stackable"]
+	# checks if item picked up is stackable and if it already exists
+	if stackable and checkItemExist(itemName):
+		pass
+		
+	else:
 		var itemIcon = ItemDb.get_item(item_id)["itemIcon"]
 		var itemValue = ItemDb.get_item(item_id)["itemValue"]
 		var slotType = ItemDb.get_item(item_id)["slotType"]
-		slot.setItem(ItemClass.new(itemName, itemIcon, null, itemValue, slotType));
+		if slot:
+			slot.setItem(ItemClass.new(itemName, itemIcon, null, itemValue, slotType, stackable, 1));
+
+func equip_item(item_id, slot :ItemSlotClass):
+	var itemName = ItemDb.get_item(item_id)["itemName"]
+	var stackable = ItemDb.get_item(item_id)["stackable"]
+	var itemIcon = ItemDb.get_item(item_id)["itemIcon"]
+	var itemValue = ItemDb.get_item(item_id)["itemValue"]
+	var slotType = ItemDb.get_item(item_id)["slotType"]
+	
+	for i in range(characterPanel.get_child_count()):
+		var panelSlot = characterPanel.get_child(i);
+		if panelSlot.slotType == slotType:
+			panelSlot.setItem(ItemClass.new(itemName, itemIcon, null, itemValue, slotType, stackable, 1));
+	
+func save():
+	var save_dict = {}
+	var inventory_dict = {}
+	var character_dict = {}
+	var counter = 0
+	for slot in slotList:
+		# If slot has an item checks if that item is same as new item
+		if slot.item:
+			if inventory_dict.has(slot.item.itemName):
+				counter += 1
+				inventory_dict[slot.item.itemName] = slot.item.itemCount + counter
+			else:
+				inventory_dict[slot.item.itemName] = slot.item.itemCount
+	
+	var panelSlotList = characterPanel.get_children()
+	for slot in panelSlotList:
+		if slot.item == null:
+			pass
+		else:
+			character_dict[slot.item.itemName] = slot.item.slotType
+	save_dict["inventory"] = inventory_dict
+	save_dict["equipment"] = character_dict
+	return save_dict

@@ -5,7 +5,6 @@ export(Global.SlotType) var slotType = Global.SlotType.SLOT_DEFAULT;
 var slotIndex;
 var item = null;
 var style;
-
 var itemSize = Vector2(20,20)
 
 # Initializes the style for itemslots
@@ -18,17 +17,14 @@ func _init():
 
 # Called to create a new item
 func setItem(newItem):
-	var maxs=max(newItem.texture.get_size().x, newItem.texture.get_size().y)
-	if maxs>itemSize.x or maxs>itemSize.y:
-		newItem.rect_min_size=itemSize
-		newItem.rect_position=Vector2(4, 4)
-		newItem.expand=true
-		newItem.stretch_mode=6
-	
+	newItem.rect_min_size=itemSize
+	newItem.rect_position=Vector2(4, 4)
+	newItem.expand=true
+	newItem.stretch_mode=6
+
 	add_child(newItem);
 	item = newItem;
 	item.itemSlot = self;
-
 # Called when item is picked up from inventory
 func pickItem():
 	item.pickItem();
