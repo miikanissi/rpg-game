@@ -3,6 +3,7 @@
 [ext_resource path="res://Game/UI/ItemBase.gd" type="Script" id=1]
 
 [node name="ItemBase" type="TextureRect"]
+expand = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

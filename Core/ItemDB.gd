@@ -18,19 +18,19 @@ const ITEMS = {
 		"itemName": "Sapphire",
 		"itemValue": 1000,
 		"itemIcon": ICON_PATH + "sapphire.png",
-		"slotType": "NONE",
+		"slotType": Global.SlotType.SLOT_DEFAULT,
 	},
 	"amethyst": {
 		"itemName": "Amethyst",
 		"itemValue": 2000,
 		"itemIcon": ICON_PATH + "amethyst.png",
-		"slotType": "NONE",
+		"slotType": Global.SlotType.SLOT_DEFAULT,
 	},
 	"error": {
 		"itemName": "Error",
 		"itemValue": 0,
 		"itemIcon": ICON_PATH + "error.png",
-		"slotType": "NONE",
+		"slotType": Global.SlotType.SLOT_DEFAULT,
 	}
 }
 

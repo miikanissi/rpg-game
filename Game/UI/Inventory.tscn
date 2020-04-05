@@ -42,10 +42,12 @@ __meta__ = {
 }
 
 [node name="SlotsContainer" type="ScrollContainer" parent="Inventory background/Item container"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 152.0
-margin_bottom = 152.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 18.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -15.0
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -54,6 +56,7 @@ __meta__ = {
 [node name="Slots" type="GridContainer" parent="Inventory background/Item container/SlotsContainer"]
 custom_constants/vseparation = 1
 custom_constants/hseparation = 1
+columns = 4
 
 [node name="Character background" type="NinePatchRect" parent="."]
 margin_left = 376.0
@@ -70,57 +73,85 @@ __meta__ = {
 }
 
 [node name="Character container" type="NinePatchRect" parent="Character background"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 120.0
-margin_bottom = 176.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -80.0
+margin_right = 52.0
+margin_bottom = 80.0
+mouse_filter = 1
 texture = ExtResource( 4 )
+patch_margin_left = 53
+patch_margin_top = 30
+patch_margin_right = 15
+patch_margin_bottom = 36
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SlotHead" type="Panel" parent="Character background/Character container"]
-margin_left = 40.0
-margin_top = 24.0
-margin_right = 64.0
-margin_bottom = 48.0
+margin_left = 38.0
+margin_top = 16.0
+margin_right = 66.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 28, 28 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+slotType = 1
+
+[node name="SlotTorso" type="Panel" parent="Character background/Character container"]
+margin_left = 38.0
+margin_top = 48.0
+margin_right = 66.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 28, 28 )
+script = ExtResource( 2 )
+slotType = 2
+
+[node name="SlotLegs" type="Panel" parent="Character background/Character container"]
+margin_left = 38.0
+margin_top = 80.0
+margin_right = 66.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 28, 28 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="SlotTorso" type="Panel" parent="Character background/Character container"]
-margin_left = 40.0
-margin_top = 56.0
-margin_right = 64.0
-margin_bottom = 80.0
-script = ExtResource( 2 )
-
-[node name="SlotLegs" type="Panel" parent="Character background/Character container"]
-margin_left = 40.0
-margin_top = 88.0
-margin_right = 64.0
-margin_bottom = 112.0
-script = ExtResource( 2 )
+slotType = 3
 
 [node name="SlotFeet" type="Panel" parent="Character background/Character container"]
-margin_left = 40.0
-margin_top = 120.0
-margin_right = 64.0
-margin_bottom = 144.0
+margin_left = 38.0
+margin_top = 112.0
+margin_right = 66.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 28, 28 )
 script = ExtResource( 2 )
+slotType = 4
 
 [node name="SlotRHand" type="Panel" parent="Character background/Character container"]
 margin_left = 8.0
-margin_top = 56.0
-margin_right = 32.0
-margin_bottom = 80.0
+margin_top = 48.0
+margin_right = 36.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 28, 28 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+slotType = 6
 
 [node name="SlotLHand" type="Panel" parent="Character background/Character container"]
-margin_left = 72.0
-margin_top = 56.0
+margin_left = 68.0
+margin_top = 48.0
 margin_right = 96.0
-margin_bottom = 80.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 28, 28 )
 script = ExtResource( 2 )
+slotType = 5

@@ -2,13 +2,11 @@ extends NinePatchRect
 
 const ItemClass = preload("res://Game/UI/ItemBase.gd");
 const ItemSlotClass = preload("res://Game/UI/ItemSlot.gd");
-const MAX_SLOTS = 45;
+const MAX_SLOTS = 44;
 
 var slotList = Array();
-
 var holdingItem = null;
 var itemOffset = Vector2(0, 0);
-
 onready var characterPanel = get_node("../../Character background/Character container")
 
 func _ready():
@@ -69,7 +67,7 @@ func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
 					slot.putItem(holdingItem);
 					holdingItem = null;
 			elif slot.item:
-				holdingItem = slot.item;
+				holdingItem = slot.item
 				itemOffset = event.global_position - holdingItem.rect_global_position;
 				slot.pickItem();
 				holdingItem.rect_global_position = event.global_position - itemOffset;
@@ -84,50 +82,39 @@ func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
 			else:
 				if slot.item:
 					var itemSlotType = slot.item.slotType;
-					var panelSlot = characterPanel.getSlotByType(slot.item.slotType);
-					if itemSlotType == Global.SlotType.SLOT_RING:
-						if panelSlot[0].item && panelSlot[1].item:
-							var panelItem = panelSlot[0].item;
-							panelSlot[0].removeItem();
-							var slotItem = slot.item;
-							slot.removeItem();
-							slot.setItem(panelItem);
-							panelSlot[0].setItem(slotItem);
-							pass
-						elif !panelSlot[0].item && panelSlot[1].item || !panelSlot[0].item && !panelSlot[1].item:
-							var tempItem = slot.item;
-							slot.removeItem();
-							panelSlot[0].equipItem(tempItem);
-						elif panelSlot[0].item && !panelSlot[1].item:
-							var tempItem = slot.item;
-							slot.removeItem();
-							panelSlot[1].equipItem(tempItem);
-							pass
+					var panelSlot = characterPanel.getSlotByType(itemSlotType);
+					if panelSlot == null:
+						pass
+					elif panelSlot.item:
+						var panelItem = panelSlot.item;
+						panelSlot.removeItem();
+						var slotItem = slot.item;
+						slot.removeItem();
+						slot.setItem(panelItem);
+						panelSlot.setItem(slotItem);
 					else:
-						if panelSlot.item:
-							var panelItem = panelSlot.item;
-							panelSlot.removeItem();
-							var slotItem = slot.item;
-							slot.removeItem();
-							slot.setItem(panelItem);
-							panelSlot.setItem(slotItem);
-						else:
-							var tempItem = slot.item;
-							slot.removeItem();
-							panelSlot.equipItem(tempItem);
+						var tempItem = slot.item;
+						slot.removeItem();
+						panelSlot.equipItem(tempItem);
 
+# Called for every input
 func _input(event : InputEvent):
-	if holdingItem && holdingItem.picked:
-		holdingItem.rect_global_position = event.global_position - itemOffset;
+	if event is InputEventMouseMotion:
+		if holdingItem && holdingItem.picked:
+			holdingItem.rect_global_position = get_global_mouse_position() - itemOffset;
 
+# Gets the closest free slot
 func getFreeSlot():
 	for slot in slotList:
 		if !slot.item:
 			return slot;
 
+# Checks if the items slot type is the same as slots type
 func canEquip(item, slot):
 	return item.slotType == slot.slotType
 
+# Called when picking up an item
+# item_id is the id in database
 func pickup_item(item_id):
 	var slot = getFreeSlot()
 	if slot:

@@ -7,9 +7,9 @@
 
 [node name="Game" type="Node"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="InventoryLayer" type="CanvasLayer" parent="."]
 
-[node name="Inventory" parent="CanvasLayer" instance=ExtResource( 4 )]
+[node name="Inventory" parent="InventoryLayer" instance=ExtResource( 4 )]
 visible = false
 
 [node name="Cave" parent="." groups=[
