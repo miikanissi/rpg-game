@@ -27,12 +27,14 @@ func _ready():
 			panelSlot.connect("gui_input", self, "slot_gui_input", [panelSlot]);
 	
 	for i in Global.loadInventory:
-		pickup_item(i)
+		for count in range(i.itemcount):
+			pickup_item(i.name.to_lower(), i.position)
 	for i in Global.loadEquipment:
 		var slot : ItemSlotClass
 		equip_item(i, slot)
 		#var axe = pickup_item(i)
 		#equip_item(i, slot : ItemSlotClass)
+	
 func mouse_enter_slot(_slot : ItemSlotClass):
 	if _slot.item:
 		pass
@@ -105,6 +107,16 @@ func _input(event : InputEvent):
 		if holdingItem && holdingItem.picked:
 			holdingItem.rect_global_position = get_global_mouse_position() - itemOffset;
 
+func getSlot(position):
+	var counter = 1
+	for slot in slotList:
+		if counter == position:
+			if !slot.item:
+				return slot;
+			else:
+				position += 1
+		counter += 1
+		
 # Gets the closest free slot
 func getFreeSlot():
 	for slot in slotList:
@@ -127,8 +139,12 @@ func canEquip(item, slot):
 
 # Called when picking up an item
 # item_id is the id in database
-func pickup_item(item_id):
-	var slot = getFreeSlot()
+func pickup_item(item_id, position):#, slot):
+	var slot
+	if !position:
+		slot = getFreeSlot()
+	else:
+		slot = getSlot(position)
 	var itemName = ItemDb.get_item(item_id)["itemName"]
 	var stackable = ItemDb.get_item(item_id)["stackable"]
 	# checks if item picked up is stackable and if it already exists
@@ -160,13 +176,15 @@ func save():
 	var character_dict = {}
 	var counter = 0
 	for slot in slotList:
-		# If slot has an item checks if that item is same as new item
+		counter += 1
 		if slot.item:
-			if inventory_dict.has(slot.item.itemName):
-				counter += 1
-				inventory_dict[slot.item.itemName] = slot.item.itemCount + counter
-			else:
-				inventory_dict[slot.item.itemName] = slot.item.itemCount
+			var item_dict = {}
+			
+			item_dict["name"] = slot.item.itemName
+			item_dict["position"] = counter
+			item_dict["itemcount"] = slot.item.itemCount
+			inventory_dict["item" + str(counter)] = item_dict
+			
 	
 	var panelSlotList = characterPanel.get_children()
 	for slot in panelSlotList:

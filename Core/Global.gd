@@ -60,7 +60,7 @@ func deferredSwitchScene(targetScenePath, params):
 	# Gets the parent of player and removes player from the scene
 	var root = get_tree().get_root()
 	var game = root.get_child( root.get_child_count() -1 )
-	var ysort = m_currentScene.get_child(m_currentScene.get_child_count() -1)
+	var ysort = m_currentScene.get_node("YSort")
 	ysort.remove_child(m_player)
 
 	# Free the old scene
@@ -77,7 +77,7 @@ func deferredSwitchScene(targetScenePath, params):
 	game.move_child(m_currentScene, 0)
 	
 	# Get the scenes YSort node and add player there as a child
-	var ysorted = m_currentScene.get_child(m_currentScene.get_child_count() -1)
+	var ysorted = m_currentScene.get_node("YSort")
 	ysorted.add_child(m_player)
 	
 	# Get spawnpoints under "Spawnpoints node"
@@ -105,7 +105,7 @@ dict so saves don't rely on the nodes' path or their source file
 func save_game():
 	# Saves player node as dictionary with values from player node
 	var save_dict = {}
-	var nodes_to_save = get_tree().get_nodes_in_group("Player")
+	var nodes_to_save = get_tree().get_nodes_in_group("Save")
 	for node in nodes_to_save:
 		save_dict[node.get_path()] = node.save()
 	
@@ -149,38 +149,27 @@ func load_game():
 	var data = parse_json(save_file.get_as_text())
 	
 	for node_path in data.keys():
-		
-		# Goes through each stage adding player into YSort node and checking if previous
-		# save was done in the location in the scene tree.
-		# If previous save was done in that stage adds that stage as current scene
-		# Not the best implementation needs refactoring but works as intended.
-		for stage in stages:
-			var ysorted = stage.get_child(stage.get_child_count() -1)
-			ysorted.add_child(m_player)
-			var node = has_node(node_path)
-			if not node:
-				ysorted.remove_child(m_player)
-				game.remove_child(stage)
-			else:
-				m_currentScene = stage
-				ysorted.remove_child(m_player)
-				game.remove_child(stage)
-				m_currentScene = stage
-
-		# Adds the current scene defined by previous loop into the game tree
-		game.add_child(m_currentScene)
-		var ysort = m_currentScene.get_child(m_currentScene.get_child_count() -1)
-		ysort.add_child(m_player)
-		
 		# Loads players data (stats, position) and adds them to player
 		var node = get_node(node_path)
+		for attribute in data[node_path]:
+			if attribute == "stage":
+				for stage in stages:
+					if stage.get_path() == data[node_path][attribute]:
+						m_currentScene = stage
+						m_currentScene.get_node("YSort").add_child(m_player)
+					else:
+						game.remove_child(stage)
+		node = get_node(node_path)
 		for attribute in data[node_path]:
 			if attribute == "pos":
 				node.set_position(Vector2(data[node_path]["pos"]["x"], data[node_path]["pos"]["y"]))
 			elif attribute == "inventory":
 				for attribute in data[node_path]["inventory"]:
-					for i in range(data[node_path]["inventory"][attribute]):
-						loadInventory.append(attribute.to_lower())
+					print(attribute)
+					var itemname = data[node_path]["inventory"][attribute]["name"]
+					var itemcount = data[node_path]["inventory"][attribute]["itemcount"]
+					var itemposition = data[node_path]["inventory"][attribute]["position"]
+					loadInventory.append(data[node_path]["inventory"][attribute])
 			elif attribute == "equipment":
 				for attribute in data[node_path]["equipment"]:
 					loadEquipment.append(attribute.to_lower())

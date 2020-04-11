@@ -102,6 +102,7 @@ func save():
 		},
 		fishing = fishing,
 		woodchopping = woodchopping,
-		mining = mining
+		mining = mining,
+		stage = self.get_parent().get_parent().get_path()
 	}
 	return save_dict
