@@ -21,6 +21,7 @@ const MAX_SPEED = 80
 enum {
 	MOVE,
 	FISH,
+	ATTACK,
 }
 var state = MOVE
 var velocity = Vector2.ZERO
@@ -33,12 +34,14 @@ func _ready():
 	animationTree.active = true
 
 # Simple state machine
-func _process(delta):
+func _physics_process(delta):
 	match state:
 		MOVE:
 			move_state(delta)
 		FISH:
 			fish_state()
+		ATTACK:
+			attack_state(delta)
 
 # Function for moving in 8 directions and triggering correct animations
 func move_state(_delta):
@@ -50,6 +53,7 @@ func move_state(_delta):
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Walk/blend_position", input_vector)
 		animationTree.set("parameters/Fishing/blend_position", input_vector)
+		animationTree.set("parameters/Attack/blend_position", input_vector)
 		animationState.travel("Walk")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION)
 	else:
@@ -57,6 +61,9 @@ func move_state(_delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
 	
 	velocity = move_and_slide(velocity)
+	if Input.is_action_just_pressed("Interact"):
+		state = ATTACK
+	
 	if Input.is_action_just_pressed("Interact") and Global.can_fish == true:
 		state = FISH
 	
@@ -70,6 +77,12 @@ func fish_state():
 	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_right") or Input.is_action_just_pressed("ui_left"):
 		state = MOVE
 
+func attack_state(_delta):
+	velocity = Vector2.ZERO
+	animationState.travel("Attack")
+
+func attack_animation_finished():
+	state = MOVE
 # Function for experience growth
 func get_required_experience(level):
 	return round(pow(level, 1.8) + level * 4)

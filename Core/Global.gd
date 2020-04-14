@@ -165,15 +165,9 @@ func load_game():
 				node.set_position(Vector2(data[node_path]["pos"]["x"], data[node_path]["pos"]["y"]))
 			elif attribute == "inventory":
 				for attribute in data[node_path]["inventory"]:
-					print(attribute)
-					var itemname = data[node_path]["inventory"][attribute]["name"]
-					var itemcount = data[node_path]["inventory"][attribute]["itemcount"]
-					var itemposition = data[node_path]["inventory"][attribute]["position"]
 					loadInventory.append(data[node_path]["inventory"][attribute])
 			elif attribute == "equipment":
 				for attribute in data[node_path]["equipment"]:
 					loadEquipment.append(attribute.to_lower())
 			else:
 				node.set(attribute, data[node_path][attribute])
-				
-	print(loadInventory)

@@ -1,0 +1,519 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Assets/UIpack_RPG/PNG/panel_brown2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/panel_brown.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barBack_horizontalLeft.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barBack_horizontalRight.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barBack_horizontalMid.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barBlue_horizontalBlue.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barBlue_horizontalLeft.png" type="Texture" id=7]
+[ext_resource path="res://Game/UI/Icons/axe.png" type="Texture" id=8]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barBlue_horizontalRight.png" type="Texture" id=9]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/buttonSquare_brown.png" type="Texture" id=10]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/buttonSquare_brown_pressed.png" type="Texture" id=11]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barRed_horizontalRight.png" type="Texture" id=12]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barRed_horizontalMid.png" type="Texture" id=13]
+[ext_resource path="res://Assets/UIpack_RPG/PNG/barRed_horizontalLeft.png" type="Texture" id=14]
+[ext_resource path="res://Game/UI/Icons/Hp.png" type="Texture" id=15]
+[ext_resource path="res://Game/UI/Icons/coinstack.png" type="Texture" id=16]
+[ext_resource path="res://Game/UI/Icons/bag.png" type="Texture" id=17]
+[ext_resource path="res://Game/UI/Icons/skills.png" type="Texture" id=18]
+[ext_resource path="res://Game/UI/Font/slkscr.ttf" type="DynamicFontData" id=19]
+
+[sub_resource type="DynamicFont" id=1]
+size = 17
+font_data = ExtResource( 19 )
+
+[node name="Overlay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Outside Panel" type="NinePatchRect" parent="."]
+margin_right = 640.0
+margin_bottom = 360.0
+texture = ExtResource( 1 )
+patch_margin_left = 63
+patch_margin_top = 31
+patch_margin_right = 41
+patch_margin_bottom = 33
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Xp bar background" type="NinePatchRect" parent="."]
+margin_left = 432.0
+margin_top = 8.0
+margin_right = 632.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+patch_margin_left = 55
+patch_margin_right = 13
+patch_margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Left" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 32.0
+margin_top = 8.0
+margin_right = 48.0
+margin_bottom = 24.0
+texture = ExtResource( 3 )
+patch_margin_left = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Fill Left" type="NinePatchRect" parent="Xp bar background/Bar Back Left"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+patch_margin_left = 8
+
+[node name="Bar Back Middle" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 48.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle" type="NinePatchRect" parent="Xp bar background/Bar Back Middle"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle2" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 64.0
+margin_top = 8.0
+margin_right = 80.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle2" type="NinePatchRect" parent="Xp bar background/Bar Back Middle2"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle3" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 80.0
+margin_top = 8.0
+margin_right = 96.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle3" type="NinePatchRect" parent="Xp bar background/Bar Back Middle3"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle4" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 96.0
+margin_top = 8.0
+margin_right = 112.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle4" type="NinePatchRect" parent="Xp bar background/Bar Back Middle4"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle5" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 112.0
+margin_top = 8.0
+margin_right = 128.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle5" type="NinePatchRect" parent="Xp bar background/Bar Back Middle5"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle6" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 128.0
+margin_top = 8.0
+margin_right = 144.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle6" type="NinePatchRect" parent="Xp bar background/Bar Back Middle6"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle7" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 144.0
+margin_top = 8.0
+margin_right = 160.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle7" type="NinePatchRect" parent="Xp bar background/Bar Back Middle7"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle8" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 160.0
+margin_top = 8.0
+margin_right = 176.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle8" type="NinePatchRect" parent="Xp bar background/Bar Back Middle8"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Right" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 176.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 24.0
+texture = ExtResource( 4 )
+patch_margin_right = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Right" type="NinePatchRect" parent="Xp bar background/Bar Back Right"]
+visible = false
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 9 )
+patch_margin_right = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Xp bar background"]
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 29.0
+margin_bottom = 28.0
+texture = ExtResource( 8 )
+
+[node name="HP bar" type="NinePatchRect" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 208.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+patch_margin_left = 55
+patch_margin_right = 13
+patch_margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Left" type="NinePatchRect" parent="HP bar"]
+margin_left = 32.0
+margin_top = 8.0
+margin_right = 48.0
+margin_bottom = 24.0
+texture = ExtResource( 3 )
+patch_margin_left = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Fill Left" type="NinePatchRect" parent="HP bar/Bar Back Left"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 14 )
+patch_margin_left = 8
+
+[node name="Bar Back Middle" type="NinePatchRect" parent="HP bar"]
+margin_left = 48.0
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle" type="NinePatchRect" parent="HP bar/Bar Back Middle"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle2" type="NinePatchRect" parent="HP bar"]
+margin_left = 64.0
+margin_top = 8.0
+margin_right = 80.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle2" type="NinePatchRect" parent="HP bar/Bar Back Middle2"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle3" type="NinePatchRect" parent="HP bar"]
+margin_left = 80.0
+margin_top = 8.0
+margin_right = 96.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle3" type="NinePatchRect" parent="HP bar/Bar Back Middle3"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle4" type="NinePatchRect" parent="HP bar"]
+margin_left = 96.0
+margin_top = 8.0
+margin_right = 112.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle4" type="NinePatchRect" parent="HP bar/Bar Back Middle4"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle5" type="NinePatchRect" parent="HP bar"]
+margin_left = 112.0
+margin_top = 8.0
+margin_right = 128.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle5" type="NinePatchRect" parent="HP bar/Bar Back Middle5"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle6" type="NinePatchRect" parent="HP bar"]
+margin_left = 128.0
+margin_top = 8.0
+margin_right = 144.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle6" type="NinePatchRect" parent="HP bar/Bar Back Middle6"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle7" type="NinePatchRect" parent="HP bar"]
+margin_left = 144.0
+margin_top = 8.0
+margin_right = 160.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle7" type="NinePatchRect" parent="HP bar/Bar Back Middle7"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle8" type="NinePatchRect" parent="HP bar"]
+margin_left = 160.0
+margin_top = 8.0
+margin_right = 176.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Middle8" type="NinePatchRect" parent="HP bar/Bar Back Middle8"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Right" type="NinePatchRect" parent="HP bar"]
+margin_left = 176.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 24.0
+texture = ExtResource( 4 )
+patch_margin_right = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar Back Right" type="NinePatchRect" parent="HP bar/Bar Back Right"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 12 )
+patch_margin_right = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HitPoints" type="NinePatchRect" parent="HP bar"]
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 29.0
+margin_bottom = 28.0
+texture = ExtResource( 15 )
+
+[node name="Coin Pouch background" type="NinePatchRect" parent="."]
+margin_left = 512.0
+margin_top = 320.0
+margin_right = 632.0
+margin_bottom = 352.0
+texture = ExtResource( 2 )
+patch_margin_left = 55
+patch_margin_right = 13
+patch_margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Coinstack" type="NinePatchRect" parent="Coin Pouch background"]
+margin_left = 92.0
+margin_top = 4.0
+margin_right = 116.0
+margin_bottom = 28.0
+texture = ExtResource( 16 )
+
+[node name="Label" type="Label" parent="Coin Pouch background"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 88.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "50000"
+
+[node name="Inventory button" type="TextureButton" parent="."]
+margin_left = 600.0
+margin_top = 280.0
+margin_right = 632.0
+margin_bottom = 312.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bag icon" type="NinePatchRect" parent="Inventory button"]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 28.0
+margin_bottom = 27.0
+texture = ExtResource( 17 )
+
+[node name="Skills button" type="TextureButton" parent="."]
+margin_left = 560.0
+margin_top = 280.0
+margin_right = 592.0
+margin_bottom = 312.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skills icon" type="NinePatchRect" parent="Skills button"]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 28.0
+margin_bottom = 27.0
+texture = ExtResource( 18 )

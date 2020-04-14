@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grid.png-5d9cfd3e6e058f83ccdb986097257fe9.stex"
+path="res://.import/AllCharacters-RHand.png-91510b84810bc053ed8c75fc370cdaf1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Base and Items/grid.png"
-dest_files=[ "res://.import/grid.png-5d9cfd3e6e058f83ccdb986097257fe9.stex" ]
+source_file="res://Assets/Base and Items/AllCharacters-RHand.png"
+dest_files=[ "res://.import/AllCharacters-RHand.png-91510b84810bc053ed8c75fc370cdaf1.stex" ]
 
 [params]
 
