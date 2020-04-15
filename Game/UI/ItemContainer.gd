@@ -7,6 +7,7 @@ const MAX_SLOTS = 44;
 var slotList = Array();
 var holdingItem = null;
 var itemOffset = Vector2(0, 0);
+
 onready var characterPanel = get_node("../../Character background/Character container")
 
 func _ready():
@@ -27,14 +28,12 @@ func _ready():
 			panelSlot.connect("gui_input", self, "slot_gui_input", [panelSlot]);
 	
 	for i in Global.loadInventory:
-		for count in range(i.itemcount):
+		for _count in range(i.itemcount):
 			pickup_item(i.name.to_lower(), i.position)
 	for i in Global.loadEquipment:
 		var slot : ItemSlotClass
 		equip_item(i, slot)
-		#var axe = pickup_item(i)
-		#equip_item(i, slot : ItemSlotClass)
-	
+
 func mouse_enter_slot(_slot : ItemSlotClass):
 	if _slot.item:
 		pass
@@ -53,12 +52,14 @@ func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
 					if canEquip(holdingItem, slot):
 						if !slot.item:
 							slot.equipItem(holdingItem, false);
+							change_equipment(holdingItem.slotType, holdingItem.itemName)
 							holdingItem = null;
 						else:
 							var tempItem = slot.item;
 							slot.pickItem();
 							tempItem.rect_global_position = event.global_position - itemOffset;
 							slot.equipItem(holdingItem, false);
+							change_equipment(holdingItem.slotType, holdingItem.itemName)
 							holdingItem = tempItem;
 				elif slot.item:
 					var tempItem = slot.item;
@@ -70,8 +71,11 @@ func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
 					slot.putItem(holdingItem);
 					holdingItem = null;
 			elif slot.item:
-				save()
+				var itemSlotType = slot.item.slotType;
+				var panelSlot = characterPanel.getSlotByType(itemSlotType);
 				holdingItem = slot.item
+				if holdingItem == panelSlot.item:
+					change_equipment(holdingItem.slotType, null)
 				itemOffset = event.global_position - holdingItem.rect_global_position;
 				slot.pickItem();
 				holdingItem.rect_global_position = event.global_position - itemOffset;
@@ -82,6 +86,7 @@ func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
 					if freeSlot:
 						var item = slot.item;
 						slot.removeItem();
+						change_equipment(item.slotType, null)
 						freeSlot.setItem(item);
 			else:
 				if slot.item:
@@ -96,16 +101,19 @@ func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
 						slot.removeItem();
 						slot.setItem(panelItem);
 						panelSlot.setItem(slotItem);
+						change_equipment(slotItem.slotType, slotItem.itemName)
 					else:
 						var tempItem = slot.item;
 						slot.removeItem();
 						panelSlot.equipItem(tempItem);
+						change_equipment(tempItem.slotType, tempItem.itemName)
 
 # Called for every input
 func _input(event : InputEvent):
 	if event is InputEventMouseMotion:
 		if holdingItem && holdingItem.picked:
 			holdingItem.rect_global_position = get_global_mouse_position() - itemOffset;
+
 
 func getSlot(position):
 	var counter = 1
@@ -165,11 +173,18 @@ func equip_item(item_id, slot :ItemSlotClass):
 	var itemValue = ItemDb.get_item(item_id)["itemValue"]
 	var slotType = ItemDb.get_item(item_id)["slotType"]
 	
+	change_equipment(slotType, itemName)
 	for i in range(characterPanel.get_child_count()):
 		var panelSlot = characterPanel.get_child(i);
 		if panelSlot.slotType == slotType:
 			panelSlot.setItem(ItemClass.new(itemName, itemIcon, null, itemValue, slotType, stackable, 1));
-	
+
+func change_equipment(slot, item):
+	if item:
+		Global.equippedItems[slot] = item
+	else:
+		Global.equippedItems[slot] = null
+
 func save():
 	var save_dict = {}
 	var inventory_dict = {}

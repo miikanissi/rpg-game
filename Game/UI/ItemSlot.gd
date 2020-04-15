@@ -2,6 +2,7 @@ extends Panel
 
 export(Global.SlotType) var slotType = Global.SlotType.SLOT_DEFAULT;
 
+
 var slotIndex;
 var item = null;
 var style;

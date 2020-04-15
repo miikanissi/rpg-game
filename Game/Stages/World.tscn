@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=2]
+[gd_scene load_steps=117 format=2]
 
 [ext_resource path="res://Game/Landscape/Cave entrance south.gd" type="Script" id=1]
 [ext_resource path="res://Game/Landscape/Rock.tscn" type="PackedScene" id=2]
@@ -39,6 +39,7 @@
 [ext_resource path="res://Game/Landscape/Furniture/FullBookcase.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Game/Landscape/Cave entrance.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Game/Landscape/Water.tres" type="TileSet" id=39]
+[ext_resource path="res://Game/Combat/Mob.tscn" type="PackedScene" id=40]
 
 [sub_resource type="TileSet" id=1]
 0/name = "1.png 0"
@@ -2163,4 +2164,9 @@ position = Vector2( -1104, -86 )
 
 [node name="FullBookcase" parent="YSort/Furniture" instance=ExtResource( 37 )]
 position = Vector2( -1040, -92 )
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Mob" parent="YSort/Enemies" instance=ExtResource( 40 )]
+position = Vector2( 52, 162 )
 [connection signal="body_entered" from="Landscape/Cave entrance south" to="Landscape/Cave entrance south" method="_on_Cave_entrance_south_body_entered"]

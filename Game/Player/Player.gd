@@ -26,14 +26,22 @@ enum {
 var state = MOVE
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
+var direction_vector = Vector2.DOWN
 
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+onready var swordHitbox = $"Hitbox Pivot/SwordHitbox"
+onready var SwordSprite = $Sword
+
+# onready var equipments = get_tree().get_root().get_node("Game").get_node("InventoryLayer").get_node("Inventory").get_node("Inventory background").get_node("Item container")
 
 func _ready():
 	animationTree.active = true
-
-# Simple state machine
+	swordHitbox.knockback_vector = direction_vector
+# warning-ignore:return_value_discarded
+	Global.connect("equip", self, "_on_equip")
+	_on_equip(null)
+# Simple state machineequipment_changed
 func _physics_process(delta):
 	match state:
 		MOVE:
@@ -50,6 +58,8 @@ func move_state(_delta):
 	input_vector = input_vector.normalized()
 	
 	if input_vector != Vector2.ZERO:
+		direction_vector = input_vector
+		swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Walk/blend_position", input_vector)
 		animationTree.set("parameters/Fishing/blend_position", input_vector)
@@ -84,6 +94,7 @@ func attack_state(_delta):
 func attack_animation_finished():
 	state = MOVE
 # Function for experience growth
+# warning-ignore:shadowed_variable
 func get_required_experience(level):
 	return round(pow(level, 1.8) + level * 4)
 
@@ -119,3 +130,13 @@ func save():
 		stage = self.get_parent().get_parent().get_path()
 	}
 	return save_dict
+	
+func _on_equip(_dictionary):
+	print("Receiving signal")
+	SwordSprite.hide()
+	var items = Global.equippedItems
+	for i in items:
+		if items.get(i):
+			if items.get(i) == "Sword":
+				SwordSprite.show()
+

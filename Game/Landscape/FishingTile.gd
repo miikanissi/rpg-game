@@ -16,7 +16,7 @@ func _on_FishingTile_body_exited(body):
 		Global.can_fish = false
 		$Label.text = "Fish (space)"
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("Interact") and Global.can_fish == true:
 		$Label.text = "Fishing"
 		

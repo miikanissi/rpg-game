@@ -36,6 +36,13 @@ const ITEMS = {
 		"itemIcon": ICON_PATH + "error.png",
 		"slotType": Global.SlotType.SLOT_DEFAULT,
 		"stackable": true,
+	},
+	"sword": {
+		"itemName": "Sword",
+		"itemValue": 1000,
+		"itemIcon": ICON_PATH + "sword.png",
+		"slotType": Global.SlotType.SLOT_RHAND,
+		"stackable": false
 	}
 }
 

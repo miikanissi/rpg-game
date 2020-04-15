@@ -9,6 +9,17 @@ enum SlotType {
 	SLOT_LHAND,
 	SLOT_RHAND
 }
+
+var equippedItems = {
+	1:null,
+	2:null,
+	3:null,
+	4:null,
+	5:null,
+	6:null
+} setget set_equipped
+
+signal equip(dictionary)
 # assigned for areas where player is able to fish
 var can_fish = false
 
@@ -31,6 +42,9 @@ func _ready():
 	# Load game loading player in the correct scene
 	load_game()
 	
+func set_equipped(_value):
+	print("Before sending signal")
+	emit_signal("equip", equippedItems)
 
 func switchScene(targetScenePath, params = null):
 	# The way around this is deferring the load to a later time, when
@@ -159,6 +173,7 @@ func load_game():
 						m_currentScene.get_node("YSort").add_child(m_player)
 					else:
 						game.remove_child(stage)
+		
 		node = get_node(node_path)
 		for attribute in data[node_path]:
 			if attribute == "pos":

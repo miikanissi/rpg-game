@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://Game/Landscape/Cave exit north.gd" type="Script" id=1]
 [ext_resource path="res://Assets/tilesets/8.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Game/Landscape/Blue crystals tall.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Game/Landscape/Purple crystals.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Game/Landscape/Purple crystals tall.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Game/Enemies/Bat.tscn" type="PackedScene" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "1.png 0"
@@ -1073,91 +1074,112 @@ shape = SubResource( 88 )
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Cave rock big" parent="YSort" instance=ExtResource( 7 )]
+[node name="Rocks" type="YSort" parent="YSort"]
+
+[node name="Cave rock big" parent="YSort/Rocks" instance=ExtResource( 7 )]
 position = Vector2( -558, 276 )
 
-[node name="Cave rock medium" parent="YSort" instance=ExtResource( 6 )]
+[node name="Cave rock medium" parent="YSort/Rocks" instance=ExtResource( 6 )]
 position = Vector2( -811, 590 )
 
-[node name="Cave rock small" parent="YSort" instance=ExtResource( 8 )]
+[node name="Cave rock small" parent="YSort/Rocks" instance=ExtResource( 8 )]
 position = Vector2( -435, 595 )
 
-[node name="Cave rock medium2" parent="YSort" instance=ExtResource( 6 )]
+[node name="Cave rock medium2" parent="YSort/Rocks" instance=ExtResource( 6 )]
 position = Vector2( -1083, 462 )
 
-[node name="Cave rock small2" parent="YSort" instance=ExtResource( 8 )]
+[node name="Cave rock small2" parent="YSort/Rocks" instance=ExtResource( 8 )]
 position = Vector2( -1163, 462 )
 
-[node name="Cave rock small3" parent="YSort" instance=ExtResource( 8 )]
+[node name="Cave rock small3" parent="YSort/Rocks" instance=ExtResource( 8 )]
 position = Vector2( -1068, 401 )
 
-[node name="Cave rock small4" parent="YSort" instance=ExtResource( 8 )]
+[node name="Cave rock small4" parent="YSort/Rocks" instance=ExtResource( 8 )]
 position = Vector2( -1139, 432 )
 
-[node name="Cave rock big2" parent="YSort" instance=ExtResource( 7 )]
+[node name="Cave rock big2" parent="YSort/Rocks" instance=ExtResource( 7 )]
 position = Vector2( -957, 850 )
 
-[node name="Cave rock big3" parent="YSort" instance=ExtResource( 7 )]
+[node name="Cave rock big3" parent="YSort/Rocks" instance=ExtResource( 7 )]
 position = Vector2( -657, 600 )
 
-[node name="Cave rock medium3" parent="YSort" instance=ExtResource( 6 )]
+[node name="Cave rock medium3" parent="YSort/Rocks" instance=ExtResource( 6 )]
 position = Vector2( -169, 227 )
 
-[node name="Cave rock big4" parent="YSort" instance=ExtResource( 7 )]
+[node name="Cave rock big4" parent="YSort/Rocks" instance=ExtResource( 7 )]
 position = Vector2( -121, 238 )
 
-[node name="Cave rock small5" parent="YSort" instance=ExtResource( 8 )]
+[node name="Cave rock small5" parent="YSort/Rocks" instance=ExtResource( 8 )]
 position = Vector2( -410, 33 )
 
-[node name="Cave rock medium4" parent="YSort" instance=ExtResource( 6 )]
+[node name="Cave rock medium4" parent="YSort/Rocks" instance=ExtResource( 6 )]
 position = Vector2( -376, 67 )
 
-[node name="Cave rock small6" parent="YSort" instance=ExtResource( 8 )]
+[node name="Cave rock small6" parent="YSort/Rocks" instance=ExtResource( 8 )]
 position = Vector2( -827, 23 )
 
-[node name="Cave rock big5" parent="YSort" instance=ExtResource( 7 )]
+[node name="Cave rock big5" parent="YSort/Rocks" instance=ExtResource( 7 )]
 position = Vector2( -766, -12 )
 
-[node name="Cave rock big6" parent="YSort" instance=ExtResource( 7 )]
+[node name="Cave rock big6" parent="YSort/Rocks" instance=ExtResource( 7 )]
 position = Vector2( 0, 590 )
 
-[node name="Cave rock small7" parent="YSort" instance=ExtResource( 8 )]
+[node name="Cave rock small7" parent="YSort/Rocks" instance=ExtResource( 8 )]
 position = Vector2( -95, 558 )
 
-[node name="Cave rock medium5" parent="YSort" instance=ExtResource( 6 )]
+[node name="Cave rock medium5" parent="YSort/Rocks" instance=ExtResource( 6 )]
 position = Vector2( -27, 520 )
 
-[node name="Rock" parent="YSort" instance=ExtResource( 9 )]
+[node name="Rock" parent="YSort/Rocks" instance=ExtResource( 9 )]
 position = Vector2( -620, 117 )
 
-[node name="Blue crystals" parent="YSort/Rock" instance=ExtResource( 10 )]
-position = Vector2( 588, -17 )
+[node name="Crystals" type="YSort" parent="YSort"]
 
-[node name="Purple crystals tall" parent="YSort" instance=ExtResource( 13 )]
+[node name="Purple crystals tall" parent="YSort/Crystals" instance=ExtResource( 13 )]
 position = Vector2( -811, -11 )
 
-[node name="Blue crystals" parent="YSort" instance=ExtResource( 10 )]
+[node name="Blue crystals" parent="YSort/Crystals" instance=ExtResource( 10 )]
 position = Vector2( -796, 209 )
 
-[node name="Blue crystals tall" parent="YSort" instance=ExtResource( 11 )]
+[node name="Blue crystals tall" parent="YSort/Crystals" instance=ExtResource( 11 )]
 position = Vector2( 39, 546 )
 
-[node name="Purple crystals" parent="YSort" instance=ExtResource( 12 )]
+[node name="Purple crystals" parent="YSort/Crystals" instance=ExtResource( 12 )]
 position = Vector2( 74, 468 )
 
-[node name="Purple crystals tall2" parent="YSort" instance=ExtResource( 13 )]
+[node name="Purple crystals tall2" parent="YSort/Crystals" instance=ExtResource( 13 )]
 position = Vector2( -1099, 432 )
 
-[node name="Blue crystals2" parent="YSort" instance=ExtResource( 10 )]
+[node name="Blue crystals2" parent="YSort/Crystals" instance=ExtResource( 10 )]
 position = Vector2( -1312, 738 )
 
-[node name="Blue crystals tall2" parent="YSort" instance=ExtResource( 11 )]
+[node name="Blue crystals tall2" parent="YSort/Crystals" instance=ExtResource( 11 )]
 position = Vector2( -1013, 876 )
 
-[node name="Purple crystals2" parent="YSort" instance=ExtResource( 12 )]
+[node name="Purple crystals2" parent="YSort/Crystals" instance=ExtResource( 12 )]
 position = Vector2( -665, 723 )
 
-[node name="Purple crystals3" parent="YSort" instance=ExtResource( 12 )]
+[node name="Purple crystals3" parent="YSort/Crystals" instance=ExtResource( 12 )]
 position = Vector2( -873, 369 )
+
+[node name="Blue crystals3" parent="YSort/Crystals" instance=ExtResource( 10 )]
+position = Vector2( -32, 100 )
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 14 )]
+position = Vector2( -288, 44 )
+
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 14 )]
+position = Vector2( -271, 221 )
+
+[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 14 )]
+position = Vector2( -123, 404 )
+
+[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 14 )]
+position = Vector2( -924, 608 )
+
+[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 14 )]
+position = Vector2( -752, 652 )
 [connection signal="body_entered" from="Landscape/Cave exit north" to="Landscape/Cave exit north" method="_on_Cave_exit_north_body_entered"]
 [connection signal="body_entered" from="Landscape/Cave exit south" to="Landscape/Cave exit south" method="_on_Cave_exit_south_body_entered"]
