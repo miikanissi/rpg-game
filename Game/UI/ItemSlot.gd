@@ -30,7 +30,7 @@ func setItem(newItem):
 func pickItem():
 	item.pickItem();
 	remove_child(item);
-	var inventory = get_tree().get_root().get_node("Game/InventoryLayer/Inventory")
+	var inventory = get_tree().get_root().get_node("Game/UI Layer/Overlay/Inventory")
 	inventory.add_child(item);
 	item = null;
 
@@ -40,7 +40,7 @@ func putItem(newItem):
 	item.itemSlot = self;
 	item.putItem();
 	item.rect_position=Vector2(4, 4)
-	var inventory = get_tree().get_root().get_node("Game/InventoryLayer/Inventory")
+	var inventory = get_tree().get_root().get_node("Game/UI Layer/Overlay/Inventory")
 	inventory.remove_child(item)
 	add_child(item);
 
@@ -56,6 +56,6 @@ func equipItem(newItem, rightClick =  true):
 	item.putItem();
 	item.rect_position=Vector2(4, 4)
 	if !rightClick:
-		var inventory = get_tree().get_root().get_node("Game/InventoryLayer/Inventory")
+		var inventory = get_tree().get_root().get_node("Game/UI Layer/Overlay/Inventory")
 		inventory.remove_child(item);
 	add_child(item);

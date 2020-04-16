@@ -5,7 +5,7 @@ const ItemSlotClass = preload("res://Game/UI/ItemSlot.gd");
 const MAX_SLOTS = 44;
 
 var slotList = Array();
-var holdingItem = null;
+var holdingItem = null setget holding
 var itemOffset = Vector2(0, 0);
 
 onready var characterPanel = get_node("../../Character background/Character container")
@@ -33,6 +33,9 @@ func _ready():
 	for i in Global.loadEquipment:
 		var slot : ItemSlotClass
 		equip_item(i, slot)
+
+func holding(_null):
+	return holdingItem
 
 func mouse_enter_slot(_slot : ItemSlotClass):
 	if _slot.item:

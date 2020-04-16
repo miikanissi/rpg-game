@@ -4,14 +4,17 @@
 [ext_resource path="res://Game/UI/ItemSlot.gd" type="Script" id=2]
 [ext_resource path="res://Game/UI/CharacterContainer.gd" type="Script" id=3]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/panelInset_beige.png" type="Texture" id=4]
-[ext_resource path="res://Game/UI/Inventory.gd" type="Script" id=8]
 [ext_resource path="res://Game/UI/ItemContainer.gd" type="Script" id=10]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+"
 
 [node name="Inventory" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 8 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
