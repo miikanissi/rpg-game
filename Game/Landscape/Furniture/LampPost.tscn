@@ -2,9 +2,8 @@
 
 [ext_resource path="res://Assets/tilesets/2.png" type="Texture" id=1]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 7.0
-height = 4.0
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 8 )
 
 [node name="LampPost" type="StaticBody2D"]
 
@@ -15,6 +14,6 @@ region_enabled = true
 region_rect = Rect2( 256, 80, 32, 80 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2( 0, 2 )
 rotation = -1.5708
 shape = SubResource( 1 )

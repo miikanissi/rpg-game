@@ -43,7 +43,14 @@ const ITEMS = {
 		"itemIcon": ICON_PATH + "sword.png",
 		"slotType": Global.SlotType.SLOT_RHAND,
 		"stackable": false
-	}
+	},
+	"fishinghat": {
+		"itemName": "FishingHat",
+		"itemValue": 100,
+		"itemIcon": ICON_PATH + "fishinghat.png",
+		"slotType": Global.SlotType.SLOT_HEAD,
+		"stackable": false
+		}
 }
 
 func get_item(item_id):

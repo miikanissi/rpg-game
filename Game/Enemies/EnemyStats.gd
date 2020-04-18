@@ -1,6 +1,8 @@
 extends Node
 
+# Scene that can be instanced for each enemy to assign their stats
 export(int) var max_health = 1
+
 onready var health = max_health setget set_health
 
 signal no_health

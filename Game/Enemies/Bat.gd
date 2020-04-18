@@ -3,6 +3,12 @@ extends KinematicBody2D
 var knockback = Vector2.ZERO
 const BatDeathEffect = preload("res://Game/Effects/BatDeathEffect.tscn")
 
+onready var hurtbox = $Hurtbox
+onready var hitbox = $Hitbox
+onready var sprite = $AnimatedSprite
+onready var stats = $EnemyStats
+onready var playerDetectionZone = $PlayerDetectionZone
+
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
 export var FRICTION = 200
@@ -15,10 +21,6 @@ enum {
 
 var velocity = Vector2.ZERO
 var state = CHASE
-
-onready var sprite = $AnimatedSprite
-onready var stats = $EnemyStats
-onready var playerDetectionZone = $PlayerDetectionZone
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -48,9 +50,15 @@ func seek_player():
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
+	hurtbox.create_hit_effect()
 
 func _on_EnemyStats_no_health():
 	queue_free()
 	var batDeathEffect = BatDeathEffect.instance()
 	get_parent().add_child(batDeathEffect)
 	batDeathEffect.global_position = global_position
+
+# Runescape style damage calculation
+# Very simple random number between max hit and 0
+func _on_Hitbox_area_entered(_area):
+	hitbox.damage = randi() % 2 + 0

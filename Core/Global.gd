@@ -19,7 +19,7 @@ var equippedItems = {
 	6:null
 } setget set_equipped
 
-signal equip(dictionary)
+signal equip(equippedItems)
 # assigned for areas where player is able to fish
 var can_fish = false
 
@@ -43,7 +43,6 @@ func _ready():
 	load_game()
 	
 func set_equipped(_value):
-	print("Before sending signal")
 	emit_signal("equip", equippedItems)
 
 func switchScene(targetScenePath, params = null):
@@ -164,7 +163,6 @@ func load_game():
 	
 	for node_path in data.keys():
 		# Loads players data (stats, position) and adds them to player
-		var node = get_node(node_path)
 		for attribute in data[node_path]:
 			if attribute == "stage":
 				for stage in stages:
@@ -174,7 +172,7 @@ func load_game():
 					else:
 						game.remove_child(stage)
 		
-		node = get_node(node_path)
+		var node = get_node(node_path)
 		for attribute in data[node_path]:
 			if attribute == "pos":
 				node.set_position(Vector2(data[node_path]["pos"]["x"], data[node_path]["pos"]["y"]))

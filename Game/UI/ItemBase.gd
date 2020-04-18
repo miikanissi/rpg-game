@@ -10,8 +10,6 @@ var itemCount;
 var picked = false;
 var label = Label.new()
 
-onready var itemCounter = $Label
-
 var itemSize = Vector2(24,24)
 func _init(_itemName, _itemTexture, _itemSlot, _itemValue, _slotType, _stackable, _itemCount):
 	self.itemName = _itemName;
@@ -31,7 +29,7 @@ func updateCounter():
 		add_child(label)
 	else:
 		label.text = str(self.itemCount)
-	#itemCounter.text = str(self.itemCount)
+
 func pickItem():
 	mouse_filter = Control.MOUSE_FILTER_IGNORE;
 	picked = true;

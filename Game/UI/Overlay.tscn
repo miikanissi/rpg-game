@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/UIpack_RPG/PNG/panel_brown2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/panel_brown.png" type="Texture" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/UIpack_RPG/PNG/barBack_horizontalMid.png" type="Texture" id=5]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/barBlue_horizontalBlue.png" type="Texture" id=6]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/barBlue_horizontalLeft.png" type="Texture" id=7]
-[ext_resource path="res://Game/UI/Icons/Fishing-icon.png" type="Texture" id=8]
+[ext_resource path="res://Game/UI/Stats Panel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/barBlue_horizontalRight.png" type="Texture" id=9]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/buttonSquare_brown.png" type="Texture" id=10]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/buttonSquare_brown_pressed.png" type="Texture" id=11]
@@ -18,13 +18,9 @@
 [ext_resource path="res://Game/UI/Icons/coinstack.png" type="Texture" id=16]
 [ext_resource path="res://Game/UI/Icons/bag.png" type="Texture" id=17]
 [ext_resource path="res://Game/UI/Icons/skills.png" type="Texture" id=18]
-[ext_resource path="res://Game/UI/Font/slkscr.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://Game/UI/Font/DefaultFont.tres" type="DynamicFont" id=19]
 [ext_resource path="res://Game/UI/Overlay.gd" type="Script" id=21]
 [ext_resource path="res://Game/UI/Inventory.tscn" type="PackedScene" id=22]
-
-[sub_resource type="DynamicFont" id=1]
-size = 17
-font_data = ExtResource( 19 )
 
 [node name="Overlay" type="Control"]
 anchor_right = 1.0
@@ -36,7 +32,9 @@ __meta__ = {
 
 [node name="Inventory" parent="." instance=ExtResource( 22 )]
 visible = false
-script = null
+
+[node name="Stats Panel" parent="." instance=ExtResource( 8 )]
+visible = false
 
 [node name="Outside Panel" type="NinePatchRect" parent="."]
 margin_right = 640.0
@@ -53,7 +51,7 @@ __meta__ = {
 [node name="HP bar background" type="NinePatchRect" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 244.0
+margin_right = 278.0
 margin_bottom = 40.0
 texture = ExtResource( 2 )
 patch_margin_left = 55
@@ -64,19 +62,19 @@ __meta__ = {
 }
 
 [node name="HP icon" type="NinePatchRect" parent="HP bar background"]
-margin_left = 5.0
-margin_top = 4.0
-margin_right = 29.0
-margin_bottom = 28.0
+margin_left = 8.0
+margin_top = 2.5
+margin_right = 32.0
+margin_bottom = 26.5
 texture = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HP Bar Initial" type="TextureProgress" parent="HP bar background"]
-margin_left = 31.0
+margin_left = 62.0
 margin_top = 8.0
-margin_right = 41.0
+margin_right = 72.0
 margin_bottom = 24.0
 max_value = 10.0
 texture_under = ExtResource( 3 )
@@ -87,9 +85,9 @@ __meta__ = {
 }
 
 [node name="HP Bar Middle" type="TextureProgress" parent="HP bar background"]
-margin_left = 41.0
+margin_left = 72.0
 margin_top = 8.0
-margin_right = 221.0
+margin_right = 252.0
 margin_bottom = 24.0
 min_value = 10.0
 max_value = 90.0
@@ -102,9 +100,9 @@ __meta__ = {
 }
 
 [node name="HP Bar Final" type="TextureProgress" parent="HP bar background"]
-margin_left = 221.0
+margin_left = 252.0
 margin_top = 8.0
-margin_right = 231.0
+margin_right = 262.0
 margin_bottom = 24.0
 min_value = 90.0
 max_value = 100.0
@@ -116,8 +114,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HP Label" type="Label" parent="HP bar background"]
+margin_left = 35.0
+margin_top = 8.0
+margin_right = 60.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "10"
+align = 1
+
 [node name="XP bar background" type="NinePatchRect" parent="."]
-margin_left = 396.0
+margin_left = 362.0
 margin_top = 8.0
 margin_right = 632.0
 margin_bottom = 40.0
@@ -129,20 +137,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="XP icon" type="NinePatchRect" parent="XP bar background"]
-margin_left = 5.0
+[node name="Stat Icon" type="NinePatchRect" parent="XP bar background"]
+margin_left = 8.0
 margin_top = 4.0
-margin_right = 29.0
+margin_right = 32.0
 margin_bottom = 28.0
-texture = ExtResource( 8 )
+texture = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="XP Bar Initial" type="TextureProgress" parent="XP bar background"]
-margin_left = 31.0
+margin_left = 62.0
 margin_top = 8.0
-margin_right = 41.0
+margin_right = 72.0
 margin_bottom = 24.0
 max_value = 10.0
 texture_under = ExtResource( 3 )
@@ -153,9 +161,9 @@ __meta__ = {
 }
 
 [node name="XP Bar Middle" type="TextureProgress" parent="XP bar background"]
-margin_left = 41.0
+margin_left = 72.0
 margin_top = 8.0
-margin_right = 221.0
+margin_right = 252.0
 margin_bottom = 24.0
 min_value = 10.0
 max_value = 90.0
@@ -168,9 +176,9 @@ __meta__ = {
 }
 
 [node name="XP Bar Final" type="TextureProgress" parent="XP bar background"]
-margin_left = 221.0
+margin_left = 252.0
 margin_top = 8.0
-margin_right = 231.0
+margin_right = 262.0
 margin_bottom = 24.0
 min_value = 90.0
 max_value = 100.0
@@ -182,8 +190,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Stat Label" type="Label" parent="XP bar background"]
+margin_left = 32.0
+margin_top = 8.0
+margin_right = 57.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Coin Pouch background" type="NinePatchRect" parent="."]
-margin_left = 512.0
+margin_left = 520.0
 margin_top = 320.0
 margin_right = 632.0
 margin_bottom = 352.0
@@ -196,9 +216,9 @@ __meta__ = {
 }
 
 [node name="Coinstack" type="NinePatchRect" parent="Coin Pouch background"]
-margin_left = 92.0
+margin_left = 84.0
 margin_top = 4.0
-margin_right = 116.0
+margin_right = 108.0
 margin_bottom = 28.0
 texture = ExtResource( 16 )
 
@@ -207,7 +227,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 88.0
 margin_bottom = 26.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 19 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "50000"
 
@@ -248,4 +268,24 @@ margin_top = 3.0
 margin_right = 28.0
 margin_bottom = 27.0
 texture = ExtResource( 18 )
+
+[node name="Settings button" type="TextureButton" parent="."]
+margin_left = 520.0
+margin_top = 280.0
+margin_right = 552.0
+margin_bottom = 312.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skills icon" type="NinePatchRect" parent="Settings button"]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 28.0
+margin_bottom = 27.0
+texture = ExtResource( 18 )
 [connection signal="pressed" from="Inventory button" to="." method="_on_Inventory_button_pressed"]
+[connection signal="pressed" from="Skills button" to="." method="_on_Skills_button_pressed"]

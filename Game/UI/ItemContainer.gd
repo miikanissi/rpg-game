@@ -31,9 +31,9 @@ func _ready():
 		for _count in range(i.itemcount):
 			pickup_item(i.name.to_lower(), i.position)
 	for i in Global.loadEquipment:
-		var slot : ItemSlotClass
-		equip_item(i, slot)
-
+		equip_item(i)
+	
+	#pickup_item("fishinghat", null)
 func holding(_null):
 	return holdingItem
 
@@ -169,7 +169,7 @@ func pickup_item(item_id, position):#, slot):
 		if slot:
 			slot.setItem(ItemClass.new(itemName, itemIcon, null, itemValue, slotType, stackable, 1));
 
-func equip_item(item_id, slot :ItemSlotClass):
+func equip_item(item_id):
 	var itemName = ItemDb.get_item(item_id)["itemName"]
 	var stackable = ItemDb.get_item(item_id)["stackable"]
 	var itemIcon = ItemDb.get_item(item_id)["itemIcon"]

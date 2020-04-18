@@ -4,7 +4,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
-height = 60.0
+height = 44.0
 
 [node name="Tent" type="StaticBody2D"]
 
@@ -15,9 +15,9 @@ region_enabled = true
 region_rect = Rect2( 192, 256, 128, 96 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -39, -22 )
+position = Vector2( -39, -14 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( 39, -22 )
+position = Vector2( 39, -14 )
 shape = SubResource( 1 )

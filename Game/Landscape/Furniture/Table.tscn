@@ -3,7 +3,8 @@
 [ext_resource path="res://Assets/tilesets/2.png" type="Texture" id=1]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 17.0
+radius = 16.0
+height = 23.9999
 
 [node name="Table" type="StaticBody2D"]
 
