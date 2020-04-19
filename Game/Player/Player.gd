@@ -87,7 +87,6 @@ func attack_state(_delta):
 func attack_animation_finished():
 	state = MOVE
 
-
 func save():
 	var save_dict = {
 		pos={

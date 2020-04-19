@@ -27,6 +27,7 @@ var skillIcons = ["melee", "max_hp", "fishing", "woodchopping", "mining"]
 onready var ItemContainer = $"Inventory/Inventory background/Item container"
 onready var Inventory = $Inventory
 onready var StatsPanel = $"Stats Panel"
+onready var SettingsPanel = $Settings
 
 func _ready():
 	StatLabel.text = str(PlayerStats.total_level)
@@ -78,15 +79,24 @@ func _on_coins_changed(coins):
 
 func _input(event):
 	if event.is_action_pressed("open_inv") and ItemContainer.holding(null) == null:
+		SettingsPanel.hide()
 		Inventory.visible = not Inventory.visible
 	if event.is_action_pressed("ui_cancel") and ItemContainer.holding(null) == null:
 		Inventory.hide()
+		SettingsPanel.visible = not SettingsPanel.visible
 	if event.is_action_pressed("open_stats"):
 		StatsPanel.visible = not StatsPanel.visible
 
 func _on_Inventory_button_pressed():
+	SettingsPanel.hide()
 	if ItemContainer.holding(null) == null:
 		Inventory.visible = not Inventory.visible
 
 func _on_Skills_button_pressed():
 	StatsPanel.visible = not StatsPanel.visible
+
+
+func _on_Settings_button_pressed():
+	Inventory.hide()
+	if ItemContainer.holding(null) == null:
+		SettingsPanel.visible = not SettingsPanel.visible

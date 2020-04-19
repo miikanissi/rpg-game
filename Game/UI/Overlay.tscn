@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/UIpack_RPG/PNG/panel_brown2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/UIpack_RPG/PNG/panel_brown.png" type="Texture" id=2]
@@ -19,8 +19,10 @@
 [ext_resource path="res://Game/UI/Icons/bag.png" type="Texture" id=17]
 [ext_resource path="res://Game/UI/Icons/skills.png" type="Texture" id=18]
 [ext_resource path="res://Game/UI/Font/DefaultFont.tres" type="DynamicFont" id=19]
+[ext_resource path="res://Game/UI/Icons/settings.png" type="Texture" id=20]
 [ext_resource path="res://Game/UI/Overlay.gd" type="Script" id=21]
 [ext_resource path="res://Game/UI/Inventory.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Game/UI/Settings.tscn" type="PackedScene" id=23]
 
 [node name="Overlay" type="Control"]
 anchor_right = 1.0
@@ -34,6 +36,10 @@ __meta__ = {
 visible = false
 
 [node name="Stats Panel" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="Settings" parent="." instance=ExtResource( 23 )]
+pause_mode = 2
 visible = false
 
 [node name="Outside Panel" type="NinePatchRect" parent="."]
@@ -286,6 +292,7 @@ margin_left = 4.0
 margin_top = 3.0
 margin_right = 28.0
 margin_bottom = 27.0
-texture = ExtResource( 18 )
+texture = ExtResource( 20 )
 [connection signal="pressed" from="Inventory button" to="." method="_on_Inventory_button_pressed"]
 [connection signal="pressed" from="Skills button" to="." method="_on_Skills_button_pressed"]
+[connection signal="pressed" from="Settings button" to="." method="_on_Settings_button_pressed"]

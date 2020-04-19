@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AllCharacters-Head.png-97faea13fc81b4d24cedce9f17533d23.stex"
+path="res://.import/settings.png-b8b3799af78aeeca94beeaf08109376d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/AllCharacters-Head.png"
-dest_files=[ "res://.import/AllCharacters-Head.png-97faea13fc81b4d24cedce9f17533d23.stex" ]
+source_file="res://Game/UI/Icons/settings.png"
+dest_files=[ "res://.import/settings.png-b8b3799af78aeeca94beeaf08109376d.stex" ]
 
 [params]
 

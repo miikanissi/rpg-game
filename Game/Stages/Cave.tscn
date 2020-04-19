@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://Game/Landscape/Cave exit north.gd" type="Script" id=1]
 [ext_resource path="res://Assets/tilesets/8.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Game/Landscape/Purple crystals.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Game/Landscape/Purple crystals tall.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Game/Enemies/Bat.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Game/Enemies/EnemySpawn.tscn" type="PackedScene" id=15]
 
 [sub_resource type="TileSet" id=1]
 0/name = "1.png 0"
@@ -992,6 +993,33 @@ position = Vector2( -18, 45 )
 [node name="Cave spawn south" type="Node2D" parent="Spawnpoints"]
 position = Vector2( -533, 595 )
 
+[node name="BatSpawns" type="Node2D" parent="Spawnpoints"]
+
+[node name="EnemySpawn" parent="Spawnpoints/BatSpawns" instance=ExtResource( 15 )]
+position = Vector2( -199, 33 )
+enemyScene = ExtResource( 14 )
+enemiesNode = NodePath("../../../YSort/Enemies")
+
+[node name="EnemySpawn2" parent="Spawnpoints/BatSpawns" instance=ExtResource( 15 )]
+position = Vector2( -478, -33 )
+enemyScene = ExtResource( 14 )
+enemiesNode = NodePath("../../../YSort/Enemies")
+
+[node name="EnemySpawn3" parent="Spawnpoints/BatSpawns" instance=ExtResource( 15 )]
+position = Vector2( -779, 644 )
+enemyScene = ExtResource( 14 )
+enemiesNode = NodePath("../../../YSort/Enemies")
+
+[node name="EnemySpawn4" parent="Spawnpoints/BatSpawns" instance=ExtResource( 15 )]
+position = Vector2( -939, 535 )
+enemyScene = ExtResource( 14 )
+enemiesNode = NodePath("../../../YSort/Enemies")
+
+[node name="EnemySpawn5" parent="Spawnpoints/BatSpawns" instance=ExtResource( 15 )]
+position = Vector2( -1203, 613 )
+enemyScene = ExtResource( 14 )
+enemiesNode = NodePath("../../../YSort/Enemies")
+
 [node name="Landscape" type="Node2D" parent="."]
 
 [node name="Cave floor" type="TileMap" parent="Landscape"]
@@ -1166,20 +1194,5 @@ position = Vector2( -873, 369 )
 position = Vector2( -32, 100 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
-
-[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 14 )]
-position = Vector2( -288, 44 )
-
-[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 14 )]
-position = Vector2( -271, 221 )
-
-[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 14 )]
-position = Vector2( -123, 404 )
-
-[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 14 )]
-position = Vector2( -924, 608 )
-
-[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 14 )]
-position = Vector2( -752, 652 )
 [connection signal="body_entered" from="Landscape/Cave exit north" to="Landscape/Cave exit north" method="_on_Cave_exit_north_body_entered"]
 [connection signal="body_entered" from="Landscape/Cave exit south" to="Landscape/Cave exit south" method="_on_Cave_exit_south_body_entered"]

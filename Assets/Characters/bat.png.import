@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AllCharacters-RHand.png-6357c953549211829c270f4d55a28c3c.stex"
+path="res://.import/bat.png-aa586418188427fb4722bc46c9f81dc5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/AllCharacters-RHand.png"
-dest_files=[ "res://.import/AllCharacters-RHand.png-6357c953549211829c270f4d55a28c3c.stex" ]
+source_file="res://Assets/Characters/bat.png"
+dest_files=[ "res://.import/bat.png-aa586418188427fb4722bc46c9f81dc5.stex" ]
 
 [params]
 

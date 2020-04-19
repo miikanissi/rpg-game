@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bat.png-930d60fd41e26bd79b5f7961a3f69b69.stex"
+path="res://.import/cow.png-0b01676b027492ecff9cf63bcfb9dd01.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Bat.png"
-dest_files=[ "res://.import/Bat.png-930d60fd41e26bd79b5f7961a3f69b69.stex" ]
+source_file="res://Assets/Characters/cow.png"
+dest_files=[ "res://.import/cow.png-0b01676b027492ecff9cf63bcfb9dd01.stex" ]
 
 [params]
 
